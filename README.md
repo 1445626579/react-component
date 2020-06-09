@@ -1,10 +1,9 @@
 # 说明
 
-=========
 
 ## validate.js
 
-========
+
 验证用来检测表单提交数据等，待扩展 同时测试对象与数组（relus该以如何格式使用） 调用方式：
 
 ```
@@ -92,8 +91,13 @@ This section has moved here: https://facebook.github.io/create-react-app/docs/de
 This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
 
 > echo "# react-component" >> README.md
+
 > git init
+
 > git add README.md
+
 > git commit -m "first commit"
-> git remote add origin git@github.com:1445626579/react-component.git
+
+> git remote add origin https://github.com/1445626579/react-component.git
+
 > git push -u origin master

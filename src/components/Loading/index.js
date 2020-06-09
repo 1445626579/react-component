@@ -40,7 +40,6 @@ class Loading extends React.PureComponent {
     }
   }
 }
-// let cDiv = document.createElement("div");
 export default (function () {
   return {
     example: ReactDom.render(
