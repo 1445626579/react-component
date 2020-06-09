@@ -21,7 +21,7 @@ validate.testAll({name:'xxxxxx',address:'xxxxx'},relus)
 validate.testArray([{name:'xxxxxx',address:'xxxxx'},{name:'xxxxxx',address:'xxxxx'}],relus);
 ```
 
-##git提交代码
+## git提交代码
 
 > git init
 
