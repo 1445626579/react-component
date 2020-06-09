@@ -1,0 +1,139 @@
+.dialogComponent {
+  background-color: #000;
+  min-height: 100vh;
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 99;
+  animation: dialogBg 0.1s linear;
+  &.closing {
+    .dialogBox {
+      animation: dialogContentReverse 0.3s linear;
+    }
+  }
+  .dialogContent {
+    background-color: #fff;
+    border: 1px solid #ffa7b1;
+    width: 305px;
+    position: relative;
+    overflow: hidden;
+    .children {
+      min-height: 234px;
+      box-sizing: border-box;
+      margin: 8px;
+      border: 1px solid #ffa7b1;
+      .childrenContent {
+        height: 100%;
+        .content {
+          padding: 35px 25px;
+          text-align: center;
+          overflow: hidden;
+          h3 {
+            color: #f96778;
+            font-size: 27px;
+            line-height: 38px;
+          }
+          .contentText {
+            line-height: 25px;
+            font-size: 15px;
+            color: #4f4f4f;
+            margin: 8px 0 24px;
+          }
+        }
+      }
+    }
+    .top,
+    .bottom {
+      position: relative;
+      &::before {
+        background-color: #ffa7b1;
+        content: "";
+        position: absolute;
+        left: -14px;
+        top: -14px;
+        width: 28px;
+        height: 28px;
+        transform: rotate(45deg);
+        transform-origin: center center;
+      }
+      &::after {
+        background-color: #ffa7b1;
+        content: "";
+        position: absolute;
+        right: -14px;
+        top: -14px;
+        width: 28px;
+        height: 28px;
+        transform: rotate(45deg);
+        transform-origin: center center;
+      }
+    }
+  }
+  .dialogBox {
+    position: relative;
+    animation: dialogContent linear 0.3s;
+    .close {
+      position: absolute;
+      left: calc(50% - 14px);
+      bottom: -48px;
+      width: 28px;
+      height: 28px;
+      &::before,
+      &::after {
+        left: 11px;
+        top: 0;
+        position: absolute;
+        content: "";
+        width: 4px;
+        height: 28px;
+        background-color: #fff;
+        transform: rotate(45deg);
+        border-radius: 2px;
+        transform-origin: center center;
+      }
+      &::after {
+        transform: rotate(-45deg);
+      }
+    }
+  }
+}
+@keyframes dialogBg {
+  from {
+    background-color: rgba($color: #000000, $alpha: 0.4);
+  }
+  to {
+    background-color: rgba($color: #000000, $alpha: 1);
+  }
+}
+@keyframes dialogContent {
+  0% {
+    transform: scale(0.4);
+  }
+  50% {
+    transform: scale(1);
+  }
+  75% {
+    transform: scale(0.93);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+@keyframes dialogContentReverse {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(0.93);
+  }
+  75% {
+    transform: scale(1);
+  }
+  100% {
+    transform: scale(0.4);
+  }
+}
