@@ -6,4 +6,30 @@
   .swiper-button-next {
     z-index: 30;
   }
+
+  .swiper-pagination-custom {
+    bottom: 10rpx;
+    left: 0;
+    width: 100%;
+  }
+
+  .swiper-pagination-customs {
+    width: 4rpx;
+    height: 4rpx;
+    border-radius: 50%;
+    display: inline-block;
+    background: #fff;
+    opacity: 0.7;
+    margin-right: 4rpx;
+  }
+
+  .swiper-pagination-customs-active {
+    width: 12rpx;
+    height: 4rpx;
+    border-radius: 2rpx;
+    display: inline-block;
+    background: #fff;
+    opacity: 1;
+    margin-right: 4rpx;
+  }
 }

@@ -61,7 +61,7 @@ ___
 
 ### 图片 "![]()" 由叹号中括号和小括号组成，小括号放链接 中括号内为图片说明 最前面加！
 
-[百度图片](https://www.baidu.com/img/PCfb_5bf082d29588c07f842ccde3f97243ea.png)
+![百度图片](https://www.baidu.com/img/PCfb_5bf082d29588c07f842ccde3f97243ea.png)
 
 ### 代码框 单行使用 "``" 多行使用三个`包起来 
 

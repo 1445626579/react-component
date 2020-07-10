@@ -3,7 +3,7 @@ import ReactDom from "react-dom";
 import "./index.scss";
 class Dialog extends React.PureComponent {
   /**
-   * 同时只可以调用一个Dialog
+   * 当内容中有变量时需要使用reload方法重置。
    * @property {Boolean} isShow 是否展示
    * @property {function} onClose 关闭按钮的回调函数
    * @property {string} title 弹窗标题
@@ -39,7 +39,7 @@ class Dialog extends React.PureComponent {
   }
   render () {
     return (
-      <div className={"dialogComponent "}>
+      <div className="dialogComponent">
         <div className="dialogBox ani" ref="animate">
           <div className="dialogContent">
             <div className="top"></div>
@@ -65,34 +65,46 @@ class Dialog extends React.PureComponent {
   }
 }
 export default (function () {
-  function animate (e) {
+  function animate (el, e) {
     if (e.animationName === "dialogContentReverse") {
       e.target.removeEventListener('animationend', animate);
-      ReactDom.unmountComponentAtNode(this.el);
-      if (document.body.hasChildNodes(this.el)) {
-
-        document.body.removeChild(this.el);
+      ReactDom.unmountComponentAtNode(el);
+      if (document.body.hasChildNodes(el)) {
+        document.body.removeChild(el);
       }
     }
   }
+  const el = () => document.createElement('div');
+  const elements = [];
+  const scrollTop = (() => ({ setPrev () { this.prev = window.scrollY; }, prev: 0 }))();
   return {
-    el: document.createElement('div'),
     show (props) {
-      document.body.appendChild(this.el);
+      const element = el();
+      document.body.appendChild(element);
       const onClose = () => {
         props.onClose && props.onClose(); this.hide();
       }
-      ReactDom.render(<Dialog {...props} onClose={onClose}></Dialog>, this.el, () => {
-        this.el.querySelector('.dialogBox').addEventListener('animationend', animate.bind(this));
+      if (elements.length === 0) {
+        scrollTop.setPrev();
+        document.body.style.height = "100vh"
+      }
+      ReactDom.render(<Dialog {...props} onClose={onClose}></Dialog>, element, () => {
+        elements.push(element);
+        element.querySelector('.dialogBox').addEventListener('animationend', animate.bind(this, element));
       });
     },
     hide () {
-      ReactDom.findDOMNode(this.el).childNodes[0].classList.add('closing');
-
-      // setTimeout(() => {
-      //   ReactDom.unmountComponentAtNode(this.el);
-      //   document.body.removeChild(this.el);
-      // }, 300)
+      ReactDom.findDOMNode(elements.pop()).childNodes[0].classList.add('closing');
+      if (elements.length === 0) {
+        document.body.style.height = "initial";
+        window.scrollTo(0, scrollTop.prev);
+      }
+    },
+    reload (props) {
+      const onClose = () => {
+        props.onClose && props.onClose(); this.hide();
+      }
+      ReactDom.render(<Dialog {...props} onClose={onClose}></Dialog>, elements[elements.length - 1]);
     }
   }
 })()
