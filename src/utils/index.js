@@ -20,3 +20,19 @@ export function getQueryVariable (variable) {
   }
   return false;
 }
+/**
+ *
+ * @param {function} promise 返回值为promise的函数
+ */
+export function promiseDebounce (promise) {
+  let isLoading = false
+  if (Object.prototype.toString.call(promise) !== '[object Function]') {
+    console.warn('入参必须是一个函数')
+    return () => { isLoading = false }
+  }
+  return (...rest) => {
+    if (isLoading) return
+    isLoading = true
+    promise(...rest).finally(() => { isLoading = false })
+  }
+}
